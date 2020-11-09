@@ -1,9 +1,13 @@
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import './App.scss';
 import Header from './components/Header/Header';
 import Search from './components/Search/Search';
 import Books from './components/Books/Books';
 
-function App() {
+function App(props) {
+  const [bookList, setBookList] = useState([]);
+
   const books = [
     {
       id: 1,
@@ -53,6 +57,13 @@ function App() {
     },
   ];
 
+  const getBooksOf = async (author) => {
+    const response = await axios.get(
+      `https://www.googleapis.com/books/v1/volumes?q=inauthor:${author}&key=AIzaSyBLy1qIK-9y8FulKeMJZeuQfBK_jqbyxE0`
+    );
+
+    // console.log(response.data.items);
+  };
   return (
     <div className='App'>
       <Header />
